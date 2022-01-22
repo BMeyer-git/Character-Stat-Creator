@@ -12,12 +12,11 @@ It starts with three example races and allocates stats using the standard array 
 
 # Development Environment
 
-{Describe the tools that you used to develop the software}
-Visual Studio Code
-Rust extension v0.7.8
-Cargo 1.58.0
-Rustc 1.58.0
-github/git
+* Visual Studio Code
+* Rust extension v0.7.8
+* Cargo 1.58.0
+* Rustc 1.58.0
+* github/git
 
 # Useful Websites
 
