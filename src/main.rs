@@ -1,3 +1,10 @@
+/*  1. Name:
+       Braxton Meyer
+    2. Software Name:
+       Personal Portfolio, Character Stat Creator
+    3. Software Description:
+       This program generates basic stat values for Dungeons and Dragons 5th edition characters
+*/
 
 
 struct Race {
@@ -14,8 +21,12 @@ struct Character {
 fn get_string(prompt:String) -> String {
     /* This function prompts the user for a string and returns it. created
     with a lot of help from tutorialspoint's Input Output section. */
+
+    // Initialize the string and present the prompt to the user
     let mut line = String::new();
     println!("{}",prompt);
+
+    // Read the line and convert it to a string before returning
     std::io::stdin().read_line(&mut line).unwrap();
     return line;
 }
@@ -23,8 +34,12 @@ fn get_string(prompt:String) -> String {
 fn get_int(prompt:String) -> i32 {
     /* This function prompts the user for an int and returns it. created
     with a lot of help from tutorialspoint's Input Output section */
+
+    // Initialize the string that will contain an int and prompt the user
     let mut line = String::new();
     println!("{}",prompt);
+
+    //read the line, convert to an integer, and return
     std::io::stdin().read_line(&mut line).unwrap();
     let integer = line.trim().parse().unwrap();
     return integer;
@@ -50,6 +65,7 @@ fn select_race() -> Race {
     println!("Race choices: 1-dwarf, 2-human, 3-orc");
     let prompt = String::from("Enter desired race number. (1-3) > ");
     let selected_race = get_int(prompt);
+    // This will loop until a valid race is selected
     loop {
         match selected_race {
             1 => return dwarf,
@@ -76,16 +92,19 @@ fn pickstats(mut current_character:Character) -> Character{
         let mut valid_input = false;
         while valid_input == false{
             println!("Selecting stat value for {}.",statlist[count]);
+            // TODO: remove "available" values from the list after selection
             println!("Available values are {:?}",values);
             let prompt = String::from("Enter desired stat value. (1-6) > ");
             choice = get_int(prompt);
             for value in values {
+                // If the choice is a valid value and hasn't been used yet, it is used!
                 if value == choice && !used_values.contains(&choice) {
                     valid_input = true;
                     used_values.push(choice);
                     break;
                 }
             }
+            // Otherwise, the value isn't valid or has already been used
             if valid_input != true && used_values.contains(&choice){
                 println!("You've already used that number!");
             }
@@ -95,7 +114,9 @@ fn pickstats(mut current_character:Character) -> Character{
             println!("");
         }
 
+        // Add the selected stat value to the character's stat, which is handily the loop iterator
         *i += choice;
+        // Unfortunately since the iterator is a value in the statlist, we also need this to keep tack of where we are
         count += 1;
     }
 
@@ -121,6 +142,7 @@ fn apply_racial_bonuses(mut current_character:Character) -> Character{
 
 fn create_character(race:Race) -> Character {
 
+    // Characters are initialized with a name, race, and empty stat values.
     let mut current_character = Character {
         name:get_string(String::from("Enter your name:")),
         race:race,
@@ -137,6 +159,7 @@ fn create_character(race:Race) -> Character {
 fn display_character(character:Character){
     println!("NAME: {}",character.name);
     println!("RACE: {}",character.race.name);
+    // Would be nicer to put this in a loop, but it would require additional work to get the labels functioning.
     println!("STR: {}",character.stats[0]);
     println!("DEX: {}",character.stats[1]);
     println!("CON: {}",character.stats[2]);
