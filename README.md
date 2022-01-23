@@ -8,7 +8,7 @@ rust and use various features such as structures within the development environm
 
 It starts with three example races and allocates stats using the standard array system.
 
-[Software Demo Video](http://youtube.link.goes.here)
+[Software Demo Video](https://youtu.be/u4_A7Sn4Veo)
 
 # Development Environment
 
